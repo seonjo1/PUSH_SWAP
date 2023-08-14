@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:11 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/14 21:33:24 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:48:15 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,49 +106,54 @@ void	move_set(t_stack *a, t_stack *b, int *group, int g)
 	int	i;
 	int	j;
 
-	i = g - 1;
+	i = g * 3 - 1;
 	if (a -> size > b -> size)
 	{
-		while (i-- > (g / 3) * 2)
+		while (i >= g * 2)
 		{
 			j = 0;
 			while (j++ < group[i])
 				pb(a, b);
+			i--;
 		}
 	}
 	else
 	{
-		while (i-- > (g / 3) * 2)
+		while (i >= g * 2)
 		{
 			j = 0;
 			while (j++ < group[i])
 				pa(a, b);
+			i--;
 		}
 	}
-	group[g * 3 - 1] = (g / 3) * 2 - 1;
-	group[g * 3 - 2] = 0;
-	group[g * 3 - 3] = g / 3 - 1;
 }
 
-void	set_box2(int box[], int *group, int g)
+void	set_box2(int box[], int *group, int *tri, int g)
 {
-	box[0] = group[group[g * 3 - 1]--];
-	box[1] = group[group[g * 3 - 2]--];
-	box[2] = group[group[g * 3 - 3]--];
+	box[0] = group[tri[g + 1]--];
+	box[1] = group[tri[g + 2]++];
+	box[2] = group[tri[g + 3]--];
 }
 
-int	*init_box(t_stack *a, t_stack *b, int g)
+int	*init_box(t_stack *a, t_stack *b, int *tri, int g)
 {
 	int	*box;
 
-	box = malloc(sizeof(int) * 6);
+	box = malloc(sizeof(int) * 7);
 	if (box == NULL)
 		return (NULL);
 	box[0] = 0;
 	box[1] = 0;
 	box[2] = 0;
-	box[4] = (g / 3) * 2 - 1;
-	box[5] = 0;
+	box[4] = 0;
+	if (a -> size < b -> size)
+		box[4] = 1;
+	box[5] = g;
+	box[6] = 0;
+	tri[g + 1] = g * 2 - 1;
+	tri[g + 2] = 0;
+	tri[g + 3] = g * 3 - 1;
 	if (a -> size > b -> size)
 		box[3] = 0;
 	else
@@ -252,7 +257,7 @@ int	pick_one(int arr[], int tri_type)
 	return (arr[i]);
 }
 
-int	select_n(t_stack *a, t_stack *b, int box[], int tri_type)
+int	select_n1(t_stack *a, t_stack *b, int box[], int tri_type)
 {
 	int	arr[3];
 
@@ -280,6 +285,34 @@ int	select_n(t_stack *a, t_stack *b, int box[], int tri_type)
 	return (pick_one(arr, tri_type));
 }
 
+int	select_n2(t_stack *a, t_stack *b, int box[], int tri_type)
+{
+	int	arr[3];
+
+	arr[0] = -1;
+	arr[1] = -1;
+	arr[2] = -1;
+	if (peek_top(b, 1) < peek_bot(b, 1))
+	{
+		if (peek_bot(b, 1) < peek_bot(a, 1))
+			set_arr1(arr, box, 0);
+		else if (peek_top(b, 1) < peek_bot(a, 1))
+			set_arr1(arr, box, 1);
+		else
+			set_arr1(arr, box, 2);
+	}
+	else
+	{
+		if (peek_bot(b, 1) > peek_bot(a, 1))
+			set_arr2(arr, box, 3);
+		else if (peek_top(b, 1) > peek_bot(a, 1))
+			set_arr2(arr, box, 4);
+		else
+			set_arr2(arr, box, 5);
+	}
+	return (pick_one(arr, tri_type));
+}
+
 void	push_to_b(t_stack *a, t_stack *b, int n)
 {
 	if (n == 0)
@@ -290,7 +323,7 @@ void	push_to_b(t_stack *a, t_stack *b, int n)
 		pb(a, b);
 	}
 	else
-		rrb(b);	
+		rrb(b);
 }
 
 void	push_to_a(t_stack *a, t_stack *b, int n)
@@ -303,22 +336,30 @@ void	push_to_a(t_stack *a, t_stack *b, int n)
 		pa(a, b);
 	}
 	else
-		rrb(b);
+		rra(a);
 }
 
 void	group_make(t_stack *a, t_stack *b, int box[], int tri_type)
 {
 	int	n;
+	int	flag;
 
-	if (box[0] == 0 && box[1] == 0 && box[2] == 0)
-		return ;
-	n = select_n(a, b, box, tri_type);
-	if (box[3] == 0)
-		push_to_b(a, b, n);
-	else
-		push_to_a(a, b, n);
-	box[n]--;
-	group_make(a, b, box, tri_type);
+	flag = box[4];
+	while (box[0] != 0 || box[1] != 0 || box[2] != 0)
+	{	
+		if (flag == 0)
+		{
+			n = select_n1(a, b, box, tri_type);
+			push_to_b(a, b, n);
+			box[n]--;
+		}
+		else
+		{
+			n = select_n2(a, b, box, tri_type);
+			push_to_a(a, b, n);
+			box[n]--;
+		}
+	}
 }
 
 void	set_box(int *box, int member_num)
@@ -377,7 +418,7 @@ void	descending_sort(t_stack *a, t_stack *b, int member_num)
 
 int	merge(t_stack *a, t_stack *b, int member_num, int tri_type)
 {
-	int	box[4];
+	int	box[5];
 
 	if (tri_type == 0)
 		descending_sort(a, b, member_num);
@@ -387,6 +428,7 @@ int	merge(t_stack *a, t_stack *b, int member_num, int tri_type)
 	box[1] = 1;
 	box[2] = 1;
 	box[3] = 0;
+	box[4] = 0;
 	set_box(box, member_num);
 	group_make(a, b, box, tri_type);
 	return (member_num);
@@ -436,6 +478,23 @@ int	*first_sort(t_stack *a, t_stack *b, int *tri, int g)
 		else
 			group[i] = merge(a, b, member_num + 1, tri[tri[0]--]);
 		i++;
+		
+		// t_list *tmp;
+		// printf("\n\na\n");
+		// tmp = a -> top;
+		// while (tmp != NULL)
+		// {
+		// 	printf("%d\n", tmp -> val);
+		// 	tmp = tmp -> down;
+		// }
+		// printf("\nb\n");
+		// tmp = b -> top;
+		// while (tmp != NULL)
+		// {
+		// 	printf("%d\n", tmp -> val);
+		// 	tmp = tmp -> down;
+		// }
+		
 	}
 	return (group);
 }
@@ -447,18 +506,18 @@ int	*m_sort(t_stack *a, t_stack *b, int *tri, int g)
 	int		*box;
 
 	group = first_sort(a, b, tri, g);
-	while (g > 6)
+	while (g > 2)
 	{
 		g = g / 3;
 		group2 = malloc(sizeof(int) * g + 1);
-		box = init_box(a, b, g);
+		box = init_box(a, b, tri, g);
 		if (group2 == NULL || box == NULL)
 			return (free_arr(group, group2, box, tri));
 		move_set(a, b, group, g);
-		while (box[4]-- >= 0)
+		while (box[5]-- > 0)
 		{	
-			set_box2(box, group, g);
-			group2[box[5]++] = box[0] + box[1] + box[2];
+			set_box2(box, group, tri, g);
+			group2[box[6]++] = box[0] + box[1] + box[2];
 			group_make(a, b, box, tri[tri[0]--]);
 		}
 		free(group);
