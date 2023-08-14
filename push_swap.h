@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:13 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/08 16:45:45 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/14 20:37:01 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
+# include <stdio.h> // 지워라
 
 typedef struct s_list{
-	int		val;
-	t_list	*up;
-	t_list	*down;
+	int				val;
+	struct s_list	*up;
+	struct s_list	*down;
 }t_list;
 
 typedef struct s_stack
@@ -38,13 +39,15 @@ void	sa(t_stack *a);
 void	sb(t_stack *b);
 void	ss(t_stack *a, t_stack *b);
 void	pa(t_stack *a, t_stack *b);
-void	pa(t_stack *a, t_stack *b);
+void	pb(t_stack *a, t_stack *b);
 void	ra(t_stack *a);
 void	rb(t_stack *b);
 void	rr(t_stack *a, t_stack *b);
 void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
+void	free_exit(t_stack *a, t_stack *b);
 int		ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
 
 #endif

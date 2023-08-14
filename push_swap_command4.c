@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/08 16:22:51 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/14 20:39:29 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,29 @@
 void	rra(t_stack *a)
 {
 	if (a -> size > 1)
+	{
 		push_u(a, pop_d(a));
+		printf("rra\n");
+	}
 }
 
 void	rrb(t_stack *b)
 {
 	if (b -> size > 1)
+	{	
 		push_u(b, pop_d(b));
+		printf("rrb\n");
+	}
 }
 
 void	rrr(t_stack *a, t_stack *b)
 {
-	rra(a);
-	rrb(b);
+	if (a -> size > 1)
+		push_u(a, pop_d(a));
+	if (b -> size > 1)
+		push_u(b, pop_d(b));
+	if (a -> size > 1 || b -> size > 1)
+		printf("rrr\n");
 }
 
 t_stack	*make_stack(void)
@@ -48,10 +58,10 @@ t_list	*make_lst(char *str)
 	t_list	*lst;
 	int		val;
 
-	val = atoi(str);
+	val = ft_atoi(str);
 	lst = malloc(sizeof(t_list));
 	if (lst == NULL)
-		exit(1);
+		return (NULL);
 	lst -> up = NULL;
 	lst -> down = NULL;
 	lst -> val = val;
