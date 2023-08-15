@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/14 21:04:18 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/15 12:59:39 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ t_list	*pop_u(t_stack *s)
 
 	lst = s -> top;
 	s -> top = s -> top -> down;
+	lst -> down = NULL;
 	s -> size--;
 	if (s -> size == 0)
 		s -> bot = NULL;
@@ -32,6 +33,7 @@ t_list	*pop_d(t_stack *s)
 
 	lst = s -> bot;
 	s -> bot = s -> bot -> up;
+	lst -> up = NULL;
 	s -> size--;
 	if (s -> size == 0)
 		s -> top = NULL;

@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/14 21:10:04 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/15 13:51:33 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,34 +14,44 @@
 
 void	sa(t_stack *a)
 {
-	t_list	*tmp;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
 	if (a -> size > 1)
 	{
-		tmp = a -> top -> down;
-		tmp -> down -> up = a -> top;
-		a -> top -> down = tmp -> down;
-		tmp -> down = a -> top;
-		a -> top -> up = tmp;
-		tmp -> up = NULL;
-		a -> top = tmp;
+		tmp1 = a -> top;
+		tmp2 = tmp1 -> down;
+		a -> top = tmp2;
+		if (a -> size == 2)
+			a -> bot = tmp1;
+		else
+			tmp2 -> down -> up = tmp1;
+		tmp1 -> up = tmp2;
+		tmp1 -> down = tmp2 -> down;
+		tmp2 -> up = NULL;
+		tmp2 -> down = tmp1;
 		printf("sa\n");
 	}
 }
 
 void	sb(t_stack *b)
 {
-	t_list	*tmp;
+	t_list	*tmp1;
+	t_list	*tmp2;
 
 	if (b -> size > 1)
 	{
-		tmp = b -> top -> down;
-		tmp -> down -> up = b -> top;
-		b -> top -> down = tmp -> down;
-		tmp -> down = b -> top;
-		b -> top -> up = tmp;
-		tmp -> up = NULL;
-		b -> top = tmp;
+		tmp1 = b -> top;
+		tmp2 = tmp1 -> down;
+		b -> top = tmp2;
+		if (b -> size == 2)
+			b -> bot = tmp1;	
+		else
+			tmp2 -> down -> up = tmp1;
+		tmp1 -> up = tmp2;
+		tmp1 -> down = tmp2 -> down;
+		tmp2 -> up = NULL;
+		tmp2 -> down = tmp1;
 		printf("sb\n");
 	}
 }
