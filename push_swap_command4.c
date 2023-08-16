@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/15 19:39:30 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:26:08 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	rra(t_stack *a)
 	if (a -> size > 1)
 	{
 		push_u(a, pop_d(a));
-		printf("rra\n");
+		if (write(1, "rra\n", 4) == -1)
+			exit(1);
 	}
 }
 
@@ -26,7 +27,8 @@ void	rrb(t_stack *b)
 	if (b -> size > 1)
 	{	
 		push_u(b, pop_d(b));
-		printf("rrb\n");
+		if (write(1, "rrb\n", 4) == -1)
+			exit(1);
 	}
 }
 
@@ -37,7 +39,8 @@ void	rrr(t_stack *a, t_stack *b)
 	if (b -> size > 1)
 		push_u(b, pop_d(b));
 	if (a -> size > 1 || b -> size > 1)
-		printf("rrr\n");
+		if (write(1, "rrr\n", 4) == -1)
+			exit(1);
 }
 
 t_stack	*make_stack(void)

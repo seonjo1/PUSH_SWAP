@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/14 19:16:38 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:26:29 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	ra(t_stack *a)
 	if (a -> size > 1)
 	{
 		push_d(a, pop_u(a));
-		printf("ra\n");
+		if (write(1, "ra\n", 3) == -1)
+			exit(1);
 	}
 }
 
@@ -26,7 +27,8 @@ void	rb(t_stack *b)
 	if (b -> size > 1)
 	{
 		push_d(b, pop_u(b));
-		printf("rb\n");
+		if (write(1, "rb\n", 3) == -1)
+			exit(1);
 	}
 }
 
@@ -37,7 +39,10 @@ void	rr(t_stack *a, t_stack *b)
 	if (b -> size > 1)
 		push_d(b, pop_u(b));
 	if (a -> size > 1 || b -> size > 1)
-		printf("rr\n");
+	{
+		if (write(1, "rr\n", 3) == -1)
+			exit(1);
+	}
 }
 
 int	ft_atoi(const char *str)

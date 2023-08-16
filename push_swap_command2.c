@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/15 13:51:33 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/16 19:32:52 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	sa(t_stack *a)
 		tmp1 -> down = tmp2 -> down;
 		tmp2 -> up = NULL;
 		tmp2 -> down = tmp1;
-		printf("sa\n");
+		if (write(1, "sa\n", 3) == -1)
+			exit(1);
 	}
 }
 
@@ -45,14 +46,15 @@ void	sb(t_stack *b)
 		tmp2 = tmp1 -> down;
 		b -> top = tmp2;
 		if (b -> size == 2)
-			b -> bot = tmp1;	
+			b -> bot = tmp1;
 		else
 			tmp2 -> down -> up = tmp1;
 		tmp1 -> up = tmp2;
 		tmp1 -> down = tmp2 -> down;
 		tmp2 -> up = NULL;
 		tmp2 -> down = tmp1;
-		printf("sb\n");
+		if (write(1, "sb\n", 3) == -1)
+			exit(1);
 	}
 }
 
@@ -78,7 +80,8 @@ void	ss(t_stack *a, t_stack *b)
 		push_u(b, tmp_b1);
 	}
 	if (a -> size > 1 || b -> size > 1)
-		printf("ss\n");
+		if (write(1, "ss\n", 3) == -1)
+			exit(1);
 }
 
 void	pa(t_stack *a, t_stack *b)
@@ -86,7 +89,8 @@ void	pa(t_stack *a, t_stack *b)
 	if (b -> size > 0)
 	{
 		push_u(a, pop_u(b));
-		printf("pa\n");
+		if (write(1, "pa\n", 3) == -1)
+			exit(1);
 	}
 }
 
@@ -95,6 +99,7 @@ void	pb(t_stack *a, t_stack *b)
 	if (a -> size > 0)
 	{
 		push_u(b, pop_u(a));
-		printf("pb\n");
+		if (write(1, "pb\n", 3) == -1)
+			exit(1);
 	}
 }

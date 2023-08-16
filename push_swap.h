@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:13 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/14 20:37:01 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/16 17:26:16 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include <stdio.h> // 지워라
+# include <unistd.h>
+# include <stdio.h>
 
 typedef struct s_list{
 	int				val;
@@ -28,7 +29,7 @@ typedef struct s_stack
 	t_list	*top;
 	t_list	*bot;
 }t_stack;
-
+ 
 t_list	*pop_u(t_stack *s);
 t_list	*pop_d(t_stack *s);
 void	push_u(t_stack *s, t_list *new);
