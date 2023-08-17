@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_command1.c                               :+:      :+:    :+:   */
+/*   push_and_pop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:39:38 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/15 12:59:39 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/17 14:22:54 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	push_u(t_stack *s, t_list *new)
+{
+	if (s -> size == 0)
+		s -> bot = new;
+	else
+		s -> top -> up = new;
+	new -> down = s -> top;
+	new -> up = NULL;
+	s -> top = new;
+	s -> size++;
+}	
+
+void	push_d(t_stack *s, t_list *new)
+{
+	if (s -> size == 0)
+		s -> top = new;
+	else
+		s -> bot -> down = new;
+	new -> up = s -> bot;
+	new -> down = NULL;
+	s -> bot = new;
+	s -> size++;
+}
 
 t_list	*pop_u(t_stack *s)
 {
@@ -41,27 +65,3 @@ t_list	*pop_d(t_stack *s)
 		s -> bot -> down = NULL;
 	return (lst);
 }
-
-void	push_u(t_stack *s, t_list *new)
-{
-	if (s -> size == 0)
-		s -> bot = new;
-	else
-		s -> top -> up = new;
-	new -> down = s -> top;
-	new -> up = NULL;
-	s -> top = new;
-	s -> size++;
-}	
-
-void	push_d(t_stack *s, t_list *new)
-{
-	if (s -> size == 0)
-		s -> top = new;
-	else
-		s -> bot -> down = new;
-	new -> up = s -> bot;
-	new -> down = NULL;
-	s -> bot = new;
-	s -> size++;
-}	
