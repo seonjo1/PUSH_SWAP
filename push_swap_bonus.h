@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:13 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 21:45:10 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/18 16:54:54 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,14 @@ typedef struct s_glist
 	struct s_glist	*next;
 }t_glist;
 
+int		ft_atoi(char *str);
+char	*get_next_line(int fd);
+char	**ft_split(char const *s, char c);
 void	is_null(char **arr);
 void	execute(t_stack *a, t_stack *b, char *man);
-char	*get_next_line(int fd);
 void	*all_free(t_glist **head);
 void	*free_dest(char *dest);
 void	*remove_node(t_glist **head, int fd);
-t_glist	*find_node(t_glist **head, int fd);
-int		ft_atoi(char *str);
-char	**ft_split(char const *s, char c);
 void	error(void);
 void	push_u(t_stack *s, t_list *new);
 void	push_d(t_stack *s, t_list *new);
@@ -68,5 +67,6 @@ t_list	*pop_u(t_stack *s);
 t_list	*pop_d(t_stack *s);
 t_list	*make_lst(char *str);
 t_stack	*make_stack(void);
+t_glist	*find_node(t_glist **head, int fd);
 
 #endif

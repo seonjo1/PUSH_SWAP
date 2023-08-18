@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:11 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 21:45:49 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/18 16:52:13 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ static void	is_dup(t_stack *a, int i, int j)
 	arr = malloc(sizeof(int) * (a -> size));
 	now = a -> top;
 	next = now -> down;
-	arr[i++] = now -> val;
 	while (next != NULL)
 	{
 		j = 0;
+		arr[i++] = now -> val;
 		while (j < i)
 		{
 			if (arr[j] == next -> val)
@@ -97,6 +97,8 @@ int	main(int argc, char **argv)
 	t_stack	*a;
 	t_stack	*b;
 
+	if (argc == 1)
+		exit(0);
 	a = make_stack();
 	b = make_stack();
 	all_push(argc, argv, a);

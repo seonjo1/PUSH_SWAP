@@ -6,11 +6,24 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:11 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 16:41:51 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/18 16:47:43 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void	is_null(char **arr)
+{
+	int	i;
+
+	i = 0;
+	if (arr == NULL)
+		error();
+	while (arr[i] != NULL)
+		i++;
+	if (i == 0)
+		error();
+}
 
 static void	all_push(int argc, char **argv, t_stack *a)
 {
@@ -23,8 +36,7 @@ static void	all_push(int argc, char **argv, t_stack *a)
 	while (++i < argc)
 	{
 		arr = ft_split(argv[i], ' ');
-		if (arr == NULL)
-			error();
+		is_null(arr);
 		j = -1;
 		while (arr[++j] != NULL)
 		{
