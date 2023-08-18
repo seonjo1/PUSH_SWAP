@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:11 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/18 16:52:13 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/18 19:29:28 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static int	sort_check(t_stack *a, int flag)
 	int		*arr;
 	int		i;
 
+	if (a -> size == 0)
+		return (1);
 	arr = malloc(sizeof(int) * (a -> size));
 	i = 0;
 	now = a -> top;
@@ -106,9 +108,11 @@ int	main(int argc, char **argv)
 	man = get_next_line(0);
 	while (man != NULL)
 	{
-		execute(a, b, man);
+		execute(a, b, man, ft_strlen(man));
+		free(man);
 		man = get_next_line(0);
 	}
+	free(man);
 	if (sort_check(a, 0) == 0 && b -> size == 0)
 		write_sign("OK\n");
 	else
