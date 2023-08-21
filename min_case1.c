@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 14:28:09 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 14:41:14 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:18:10 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,60 @@ void	sort_three(t_stack *a)
 		rra(a);
 }
 
+void	sort_three_rvs(t_stack *b)
+{
+	int	x;
+	int	y;
+	int	z;
+
+	x = peek_top(b, 1);
+	y = peek_top(b, 2);
+	z = peek_bot(b, 1);
+	if (x > y && y < z && z > x)
+		rrb(b);
+	else if (x < y && y < z && x < z)
+	{
+		sb(b);
+		rrb(b);
+	}
+	else if (x > y && x > z && z > y)
+	{
+		rrb(b);
+		sb(b);
+	}
+	else if (x < y && x < z && y > z)
+		rb(b);
+	else if (x < y && x > z && y > z)
+		sb(b);
+}
+
+static void	sort_eight(t_stack *a, t_stack *b)
+{
+	int	an;
+	int	bn;
+
+	pb(a, b);
+	pb(a, b);
+	pb(a, b);
+	sort_three_rvs(b);
+	sort_five(a, b);
+	an = 5;
+	bn = 3;
+	while (an > 0 || bn > 0)
+	{
+		if (an == 0 || (bn != 0 && peek_bot(a, 1) < peek_top(b, 1)))
+		{
+			pa(a, b);
+			bn--;
+		}
+		else
+		{
+			rra(a);
+			an--;
+		}
+	}
+}
+
 void	min_case(t_stack *a, t_stack *b)
 {
 	if (a -> size == 2)
@@ -59,6 +113,8 @@ void	min_case(t_stack *a, t_stack *b)
 		sort_six(a, b);
 	else if (a -> size == 7)
 		sort_seven(a, b);
+	else if (a -> size == 8)
+		sort_eight(a, b);
 	else
 		return ;
 	exit(0);

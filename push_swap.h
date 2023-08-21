@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:13 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 18:07:35 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:47:01 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	last_sort(t_stack *a, t_stack *b, int *group);
 void	make_one_group(t_stack *a, t_stack *b, int box[], int tri_type);
 void	sort_two(t_stack *a);
 void	sort_three(t_stack *a);
+void	sort_three_rvs(t_stack *b);
 void	sort_four(t_stack *a, t_stack *b);
 void	sort_five(t_stack *a, t_stack *b);
 void	sort_six(t_stack *a, t_stack *b);

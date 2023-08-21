@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 15:41:08 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/17 16:41:08 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/21 18:18:04 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ static int	*init_box(t_stack *a, t_stack *b, int *tri, int g)
 
 void	free_arr(int *arr1, int *arr2)
 {
-	free(arr1);
-	free(arr2);
+	if (arr1 != NULL)
+		free(arr1);
+	if (arr2 != NULL)
+		free(arr2);
 }
 
 int	*sort_start(t_stack *a, t_stack *b, int *tri, int g)
