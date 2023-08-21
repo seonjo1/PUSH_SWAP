@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:13 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/18 19:27:44 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:31:41 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,12 @@ typedef struct s_glist
 	struct s_glist	*next;
 }t_glist;
 
-int		ft_strlen(char	*man);
+int		ft_strlen(char	*command);
 int		ft_atoi(char *str);
 char	*get_next_line(int fd);
 char	**ft_split(char const *s, char c);
 void	is_null(char **arr);
-void	execute(t_stack *a, t_stack *b, char *man, int len);
+void	execute(t_stack *a, t_stack *b, char *command, int len);
 void	*all_free(t_glist **head);
 void	*free_dest(char *dest);
 void	*remove_node(t_glist **head, int fd);

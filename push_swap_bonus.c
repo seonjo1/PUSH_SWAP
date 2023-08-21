@@ -6,7 +6,7 @@
 /*   By: seonjo <seonjo@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:40:11 by seonjo            #+#    #+#             */
-/*   Updated: 2023/08/18 19:29:28 by seonjo           ###   ########.fr       */
+/*   Updated: 2023/08/21 14:31:25 by seonjo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ static void	write_sign(char *sign)
 
 int	main(int argc, char **argv)
 {
-	char	*man;
+	char	*command;
 	t_stack	*a;
 	t_stack	*b;
 
@@ -105,14 +105,14 @@ int	main(int argc, char **argv)
 	b = make_stack();
 	all_push(argc, argv, a);
 	is_dup(a, 0, 0);
-	man = get_next_line(0);
-	while (man != NULL)
+	command = get_next_line(0);
+	while (command != NULL)
 	{
-		execute(a, b, man, ft_strlen(man));
-		free(man);
-		man = get_next_line(0);
+		execute(a, b, command, ft_strlen(command));
+		free(command);
+		command = get_next_line(0);
 	}
-	free(man);
+	free(command);
 	if (sort_check(a, 0) == 0 && b -> size == 0)
 		write_sign("OK\n");
 	else
