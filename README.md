@@ -44,7 +44,9 @@
 - Push_swap Visualizer
   - input 값을 원하는 만큼 랜덤 생성 가능
   - push_swap 출력값을 넣으면 정렬되는 과정을 그림으로 보여줌
-  - https://windowdong11.github.io/push_swap_visualizer/ 
+  - https://windowdong11.github.io/push_swap_visualizer/
+    
+   <img width="987" alt="스크린샷 2024-06-25 오후 6 56 03" src="https://github.com/seonjo1/PUSH_SWAP/assets/127729846/4e6e2314-44ab-446c-9579-f8574a66ed06">
 
 ## checker 프로그램 사용법
 ```
