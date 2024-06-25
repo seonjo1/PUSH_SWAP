@@ -41,6 +41,10 @@
 ```
 - " " 안에는 원하는 수들을 공백으로 나눠 입력
 - input 수들을 정렬하는 명령어들이 1줄에 1개씩 출력
+- Push_swap Visualizer
+  - input 값을 원하는 만큼 랜덤 생성 가능
+  - push_swap 출력값을 넣으면 정렬되는 과정을 그림으로 보여줌
+  - https://windowdong11.github.io/push_swap_visualizer/ 
 
 ## checker 프로그램 사용법
 ```
