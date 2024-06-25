@@ -29,7 +29,7 @@
 - 정렬 방법이 틀리면 "KO" 출력
 - checker의 input이 형식에 맞지 않으면 "Error" 출력
 
-## 간단한 push_swap 프로그램 작동 방식 설명
+## push_swap 프로그램 작동 방식 간단한 설명
 ### merge sort 개념을 이용한 정렬
 1. 처음 stack a에 있는 수 n 개를 Group 당 3 개씩, n / 3 개의 Group으로 만들어 stack b 에 옮기기 (3 개씩 묶인 Group은 내부적으로 정렬되어 있음)
 2. stack b에 있는 Group n / 3 개를 Group 당 3 개씩, n / 9 개의 Group으로 만들어 stack a 에 옮기기 (9 개씩 묶인 Group은 내부적으로 정렬되어 있음)
